@@ -13,6 +13,14 @@
     </parent>
 
     <artifactId>AccountSystemLogic</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>za.ac.nwu</groupId>
+            <artifactId>AccountSystemDomain</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>
