@@ -22,16 +22,17 @@ public class GeneralResponse<e> implements Serializable {
     public e getPayload() {return payload;}
 
     @Override
-    public boolean equals(Object p)
-    {
-        if (this == p) return true;
-        if (p == null || getClass() != p.getClass()) return false;
-        GeneralResponse<?> that = (GeneralResponse<?>) p;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GeneralResponse<?> that = (GeneralResponse<?>) o;
         return successful == that.successful && Objects.equals(payload, that.payload);
     }
 
     @Override
-    public int hashCode() {return Objects.hash(successful,payload);}
+    public int hashCode() {
+        return Objects.hash(successful, payload);
+    }
 
     @Override
     public String toString()
