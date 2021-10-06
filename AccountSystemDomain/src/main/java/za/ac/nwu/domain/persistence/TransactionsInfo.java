@@ -6,17 +6,21 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "TRANSACTIONS", schema = "HR")
+@Table(name = "TRANSACTIONS_INFO", schema = "HR")
 public class TransactionsInfo implements Serializable{
 
-    private static final long serialVersionUID = -4499175612711763619L;
 
+    private static final long serialVersionUID = -4751001031163275754L;
+    private Long transactionInfoId;
     private Transaction transactionId;
     private BalanceTable balanceId;
     private LocalDate transactionDate;
-    private float transactionValue;
+    private Long transactionValue;
 
-    public TransactionsInfo(Transaction transactionId, BalanceTable balanceId, LocalDate transactionDate, float transactionValue) {
+    public TransactionsInfo(){}
+
+    public TransactionsInfo(Long transactionInfoId, Transaction transactionId, BalanceTable balanceId, LocalDate transactionDate, Long transactionValue) {
+        this.transactionInfoId = transactionInfoId;
         this.transactionId = transactionId;
         this.balanceId = balanceId;
         this.transactionDate = transactionDate;
@@ -24,6 +28,15 @@ public class TransactionsInfo implements Serializable{
     }
 
     @Id
+    @Column(name = "TRANSACTION_INFO_ID")
+    public Long getTransactionInfoId() {
+        return transactionInfoId;
+    }
+
+    public void setTransactionInfoId(Long transactionInfoId) {
+        this.transactionInfoId = transactionInfoId;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TRANSACTION_ID")
     public Transaction getTransactionId() {
@@ -54,11 +67,11 @@ public class TransactionsInfo implements Serializable{
     }
 
     @Column(name = "TRANSACTION_VALUE")
-    public float getTransactionValue() {
+    public Long getTransactionValue() {
         return transactionValue;
     }
 
-    public void setTransactionValue(float transactionValue) {
+    public void setTransactionValue(Long transactionValue) {
         this.transactionValue = transactionValue;
     }
 
@@ -67,18 +80,19 @@ public class TransactionsInfo implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TransactionsInfo that = (TransactionsInfo) o;
-        return Float.compare(that.transactionValue, transactionValue) == 0 && Objects.equals(transactionId, that.transactionId) && Objects.equals(balanceId, that.balanceId) && Objects.equals(transactionDate, that.transactionDate);
+        return Float.compare(that.transactionValue, transactionValue) == 0 && Objects.equals(transactionInfoId, that.transactionInfoId) && Objects.equals(transactionId, that.transactionId) && Objects.equals(balanceId, that.balanceId) && Objects.equals(transactionDate, that.transactionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionId, balanceId, transactionDate, transactionValue);
+        return Objects.hash(transactionInfoId, transactionId, balanceId, transactionDate, transactionValue);
     }
 
     @Override
     public String toString() {
         return "TransactionsInfo{" +
-                "transactionId=" + transactionId +
+                "transactionInfoId=" + transactionInfoId +
+                ", transactionId=" + transactionId +
                 ", balanceId=" + balanceId +
                 ", transactionDate=" + transactionDate +
                 ", transactionValue=" + transactionValue +

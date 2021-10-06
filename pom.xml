@@ -70,11 +70,16 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                     </exclusion>
                 </exclusions>
             </dependency>
-                <dependency>
-                    <groupId>com.oracle.database.jdbc</groupId>
-                    <artifactId>ojdbc8</artifactId>
-                    <version>18.3.0.0</version>
-                </dependency>
+            <dependency>
+                <groupId>com.oracle.database.jdbc</groupId>
+                <artifactId>ojdbc8</artifactId>
+                <version>18.3.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>2.1.6.RELEASE</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -84,5 +89,20 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <artifactId>spring-context</artifactId>
         </dependency>
     </dependencies>
-
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.1.6.RELEASE</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

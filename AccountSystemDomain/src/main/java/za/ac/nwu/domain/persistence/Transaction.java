@@ -10,17 +10,18 @@ import java.util.Set;
 @Table(name = "TRANSACTION", schema = "HR")
 public class Transaction implements Serializable{
 
-    private static final long serialVersionUID = 8335433203216599611L;
+    private static final long serialVersionUID = -7361655350118537189L;
     private Long transactionId;
     private BalanceTable balanceId;
-    private float valueToAdd;
-    private float valueToSubtract;
+    private Long valueToAdd;
+    private Long valueToSubtract;
     private LocalDate createdDate;
 
     private Set<TransactionsInfo> transactionsInfo;
 
+    public Transaction(){}
 
-    public Transaction(Long transactionId, BalanceTable balanceId, float valueToAdd, float valueToSubtract, LocalDate createdDate, Set<TransactionsInfo> transactionsInfo) {
+    public Transaction(Long transactionId, BalanceTable balanceId, Long valueToAdd, Long valueToSubtract, LocalDate createdDate, Set<TransactionsInfo> transactionsInfo) {
         this.transactionId = transactionId;
         this.balanceId = balanceId;
         this.valueToAdd = valueToAdd;
@@ -52,20 +53,20 @@ public class Transaction implements Serializable{
     }
 
     @Column(name = "VALUE_TO_ADD")
-    public float getValueToAdd() {
+    public Long getValueToAdd() {
         return valueToAdd;
     }
 
-    public void setValueToAdd(float valueToAdd) {
+    public void setValueToAdd(Long valueToAdd) {
         this.valueToAdd = valueToAdd;
     }
 
     @Column(name = "VALUE_TO_SUBTRACT")
-    public float getValueToSubtract() {
+    public Long getValueToSubtract() {
         return valueToSubtract;
     }
 
-    public void setValueToSubtract(float valueToSubtract) {
+    public void setValueToSubtract(Long valueToSubtract) {
         this.valueToSubtract = valueToSubtract;
     }
 
@@ -78,7 +79,7 @@ public class Transaction implements Serializable{
         this.createdDate = createdDate;
     }
 
-    @OneToMany(targetEntity = TransactionsInfo.class, fetch = FetchType.LAZY, mappedBy = "balanceId", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(targetEntity = TransactionsInfo.class, fetch = FetchType.LAZY, mappedBy = "transactionId", orphanRemoval = true, cascade = CascadeType.PERSIST)
     public Set<TransactionsInfo> getTransactionsInfo(){
         return transactionsInfo;
     }

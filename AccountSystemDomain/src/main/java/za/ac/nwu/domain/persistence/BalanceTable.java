@@ -9,23 +9,28 @@ import java.util.Set;
 @Table(name = "BALANCE", schema = "HR")
 public class BalanceTable implements Serializable{
 
-    private static final long serialVersionUID = 2236142550177114386L;
 
+    private static final long serialVersionUID = -4126749611664180515L;
     private Long balanceId;
     private String currency;
-    private float balanceToday;
-    private float balanceLastWeek;
+    private Long balanceToday;
+    private Long balanceLastWeek;
 
     private Set<TransactionsInfo> transactionsInfo;
     private Set<Transaction> transaction;
 
-    public BalanceTable(Long balanceId, String currency, float balanceToday, float balanceLastWeek, Set<TransactionsInfo> transactionsInfo, Set<Transaction> transaction) {
+    public BalanceTable(){}
+
+    public BalanceTable(Long balanceId, String currency, Long balanceToday, Long balanceLastWeek, Set<TransactionsInfo> transactionsInfo, Set<Transaction> transaction) {
         this.balanceId = balanceId;
         this.currency = currency;
         this.balanceToday = balanceToday;
         this.balanceLastWeek = balanceLastWeek;
         this.transactionsInfo = transactionsInfo;
         this.transaction = transaction;
+    }
+
+    public BalanceTable(String currency, Long balanceToday, Long balanceLastWeek) {
     }
 
     @Id
@@ -50,20 +55,20 @@ public class BalanceTable implements Serializable{
     }
 
     @Column(name = "BALANCE_VALUE_TODAY")
-    public float getBalanceToday() {
+    public Long getBalanceToday() {
         return balanceToday;
     }
 
-    public void setBalanceToday(float balanceToday) {
+    public void setBalanceToday(Long balanceToday) {
         this.balanceToday = balanceToday;
     }
 
     @Column(name = "BALANCE_VALUE_LAST_WEEK")
-    public float getBalanceLastWeek() {
+    public Long getBalanceLastWeek() {
         return balanceLastWeek;
     }
 
-    public void setBalanceLastWeek(float balanceLastWeek) {
+    public void setBalanceLastWeek(Long balanceLastWeek) {
         this.balanceLastWeek = balanceLastWeek;
     }
 
