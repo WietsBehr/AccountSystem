@@ -1,6 +1,7 @@
 package za.ac.nwu.translator.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.domain.dto.BalanceDto;
 import za.ac.nwu.domain.persistence.BalanceTable;
@@ -39,6 +40,15 @@ public class BalanceTranslatorImpl implements BalanceTranslator {
             return new BalanceDto(balanceTable);
         } catch (Exception e) {
             throw new RuntimeException("Unable to save to database", e);
+        }
+    }
+    @Override
+    public BalanceDto getBalanceNativeQuery(Long balanceId) {
+        try {
+            BalanceTable balanceTable = balanceRepo.getBalanceNativeQuery(balanceId);
+            return new BalanceDto(balanceTable);
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to read from the DB", e);
         }
     }
 }

@@ -4,73 +4,42 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
 
+@Table(name = "TRANSACTION")
 @Entity
-@Table(name = "TRANSACTION", schema = "HR")
-public class Transaction implements Serializable{
-
-    private static final long serialVersionUID = -7361655350118537189L;
+public class Transaction implements Serializable {
+    private static final long serialVersionUID = 2956492891373735075L;
+    @Id
+    @Column(name = "TRANSACTION_ID", nullable = false)
     private Long transactionId;
-    private BalanceTable balanceId;
+
+    @ManyToOne
+    @JoinColumn(name = "BALANCE_ID")
+    private BalanceTable balanceTable;
+
+    @Column(name = "VALUE_TO_ADD")
     private Long valueToAdd;
+
+    @Column(name = "VALUE_TO_SUBTRACT")
     private Long valueToSubtract;
+
+    @Column(name = "CREATED_DATE")
     private LocalDate createdDate;
 
-    private Set<TransactionsInfo> transactionsInfo;
+    public Transaction() {
 
-    public Transaction(){}
+    }
 
-    public Transaction(Long transactionId, BalanceTable balanceId, Long valueToAdd, Long valueToSubtract, LocalDate createdDate, Set<TransactionsInfo> transactionsInfo) {
+    public Transaction(Long transactionId, BalanceTable balanceTable, Long valueToAdd, Long valueToSubtract, LocalDate createdDate) {
         this.transactionId = transactionId;
-        this.balanceId = balanceId;
+        this.balanceTable = balanceTable;
         this.valueToAdd = valueToAdd;
         this.valueToSubtract = valueToSubtract;
         this.createdDate = createdDate;
-        this.transactionsInfo = transactionsInfo;
     }
 
-    @Id
-    @SequenceGenerator(name = "TRANSACTION_ID_GENERIC_SEQ", sequenceName = "HR.TRANSACTION_ID_GENERIC_SEQ",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRANSACTION_ID_GENERIC_SEQ")
-    @Column(name = "TRANSACTION_ID")
-    public Long getTransactionId() {
-        return transactionId;
-    }
 
-    public void setTransactionId(Long transactionId) {
-        this.transactionId = transactionId;
-    }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BALANCE_ID")
-    public BalanceTable getBalanceId() {
-        return balanceId;
-    }
-
-    public void setBalanceId(BalanceTable balanceId) {
-        this.balanceId = balanceId;
-    }
-
-    @Column(name = "VALUE_TO_ADD")
-    public Long getValueToAdd() {
-        return valueToAdd;
-    }
-
-    public void setValueToAdd(Long valueToAdd) {
-        this.valueToAdd = valueToAdd;
-    }
-
-    @Column(name = "VALUE_TO_SUBTRACT")
-    public Long getValueToSubtract() {
-        return valueToSubtract;
-    }
-
-    public void setValueToSubtract(Long valueToSubtract) {
-        this.valueToSubtract = valueToSubtract;
-    }
-
-    @Column(name = "CREATED_DATE")
     public LocalDate getCreatedDate() {
         return createdDate;
     }
@@ -79,13 +48,36 @@ public class Transaction implements Serializable{
         this.createdDate = createdDate;
     }
 
-    @OneToMany(targetEntity = TransactionsInfo.class, fetch = FetchType.LAZY, mappedBy = "transactionId", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    public Set<TransactionsInfo> getTransactionsInfo(){
-        return transactionsInfo;
+    public Long getValueToSubtract() {
+        return valueToSubtract;
     }
 
-    public void setTransactionsInfo(Set<TransactionsInfo> transactionsInfo){
-        this.transactionsInfo = transactionsInfo;
+    public void setValueToSubtract(Long valueToSubtract) {
+        this.valueToSubtract = valueToSubtract;
+    }
+
+    public Long getValueToAdd() {
+        return valueToAdd;
+    }
+
+    public void setValueToAdd(Long valueToAdd) {
+        this.valueToAdd = valueToAdd;
+    }
+
+    public BalanceTable getBalanceId() {
+        return balanceTable;
+    }
+
+    public void setBalanceId(BalanceTable balanceTable) {
+        this.balanceTable = balanceTable;
+    }
+
+    public Long getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(Long id) {
+        this.transactionId = id;
     }
 
     @Override
@@ -93,23 +85,22 @@ public class Transaction implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transaction that = (Transaction) o;
-        return Float.compare(that.valueToAdd, valueToAdd) == 0 && Float.compare(that.valueToSubtract, valueToSubtract) == 0 && Objects.equals(transactionId, that.transactionId) && Objects.equals(balanceId, that.balanceId) && Objects.equals(createdDate, that.createdDate) && Objects.equals(transactionsInfo, that.transactionsInfo);
+        return Objects.equals(transactionId, that.transactionId) && Objects.equals(balanceTable, that.balanceTable) && Objects.equals(valueToAdd, that.valueToAdd) && Objects.equals(valueToSubtract, that.valueToSubtract) && Objects.equals(createdDate, that.createdDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionId, balanceId, valueToAdd, valueToSubtract, createdDate, transactionsInfo);
+        return Objects.hash(transactionId, balanceTable, valueToAdd, valueToSubtract, createdDate);
     }
 
     @Override
     public String toString() {
         return "Transaction{" +
                 "transactionId=" + transactionId +
-                ", balanceId=" + balanceId +
+                ", balanceTable=" + balanceTable +
                 ", valueToAdd=" + valueToAdd +
                 ", valueToSubtract=" + valueToSubtract +
                 ", createdDate=" + createdDate +
-                ", transactionsInfo=" + transactionsInfo +
                 '}';
     }
 }

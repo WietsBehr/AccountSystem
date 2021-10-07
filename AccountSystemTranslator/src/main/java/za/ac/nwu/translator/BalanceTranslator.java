@@ -8,4 +8,6 @@ public interface BalanceTranslator {
     List<BalanceDto> getAllBalances();
 
     BalanceDto create(BalanceDto balanceDto);
+
+    BalanceDto getBalanceNativeQuery(Long balanceId);
 }
