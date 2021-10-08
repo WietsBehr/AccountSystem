@@ -35,10 +35,4 @@ public class FetchBalanceFlowImpl implements FetchBalanceFlow {
         return balanceTranslator.getBalanceNativeQuery(balanceId);
     }
 
-//    @Override
-//    public BalanceDto getBalanceByBalanceId(Long balanceId){
-//        return balanceTranslator.getBalanceNativeQuery(balanceId);
-//    }
-
-
 }

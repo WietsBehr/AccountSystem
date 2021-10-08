@@ -1,12 +1,14 @@
 package za.ac.nwu.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import za.ac.nwu.domain.persistence.BalanceTable;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@ApiModel(value = "Balance",description = "A DTO that represents the Balance")
 public class BalanceDto implements Serializable {
 
     private static final long serialVersionUID = -4937287778746371405L;
@@ -39,7 +41,7 @@ public class BalanceDto implements Serializable {
             name = "Balance Id",
             notes = "Identifies the client's balance Id",
             dataType = "java.lang.Long",
-            example = "00001L",
+            example = "31535L",
             required = true)
     public Long getBalanceId() {
         return balanceId;

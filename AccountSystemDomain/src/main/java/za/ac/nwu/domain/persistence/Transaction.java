@@ -26,9 +26,7 @@ public class Transaction implements Serializable {
     @Column(name = "CREATED_DATE")
     private LocalDate createdDate;
 
-    public Transaction() {
 
-    }
 
     public Transaction(Long transactionId, BalanceTable balanceTable, Long valueToAdd, Long valueToSubtract, LocalDate createdDate) {
         this.transactionId = transactionId;
@@ -38,7 +36,9 @@ public class Transaction implements Serializable {
         this.createdDate = createdDate;
     }
 
+    public Transaction(BalanceTable balanceId, Long valueToAdd, Long valueToSubtract, LocalDate createdDate) {
 
+    }
 
     public LocalDate getCreatedDate() {
         return createdDate;
@@ -68,8 +68,8 @@ public class Transaction implements Serializable {
         return balanceTable;
     }
 
-    public void setBalanceId(BalanceTable balanceTable) {
-        this.balanceTable = balanceTable;
+    public void setBalanceId(BalanceTable balanceId) {
+        this.balanceTable = balanceId;
     }
 
     public Long getTransactionId() {
@@ -85,12 +85,12 @@ public class Transaction implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transaction that = (Transaction) o;
-        return Objects.equals(transactionId, that.transactionId) && Objects.equals(balanceTable, that.balanceTable) && Objects.equals(valueToAdd, that.valueToAdd) && Objects.equals(valueToSubtract, that.valueToSubtract) && Objects.equals(createdDate, that.createdDate);
+        return balanceTable.equals(that.balanceTable) && Objects.equals(valueToAdd, that.valueToAdd) && Objects.equals(valueToSubtract, that.valueToSubtract) && Objects.equals(createdDate, that.createdDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionId, balanceTable, valueToAdd, valueToSubtract, createdDate);
+        return Objects.hash(balanceTable, valueToAdd, valueToSubtract, createdDate);
     }
 
     @Override

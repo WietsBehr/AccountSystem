@@ -29,20 +29,6 @@ public class BalanceController {
         this.createBalanceFlow = createBalanceFlow;
     }
 
-
-    @GetMapping("/balanceToday")
-    @ApiOperation(value = "Gets all the balances of today", notes = "Returns a list of balances")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Balance value today returned", response = GeneralResponse.class),
-            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-            @ApiResponse(code = 404, message = "Not found", response = GeneralResponse.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
-    public ResponseEntity<GeneralResponse<List<BalanceDto>>> getAll(){
-        List<BalanceDto> balances = fetchBalanceFlow.getAllBalances();
-        GeneralResponse<List<BalanceDto>> response = new GeneralResponse<>(true, balances);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
     @PostMapping("/createEntry")
     @ApiOperation(value = "Creates a new client", notes = "Adds a new client to the database")
     @ApiResponses(value = {
@@ -57,4 +43,19 @@ public class BalanceController {
         GeneralResponse<BalanceDto> response = new GeneralResponse<>(true, balanceResponse);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+    @GetMapping("")
+    @ApiOperation(value = "Gets all the balances of today", notes = "Returns a list of balances")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Balance value today returned", response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Not found", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
+    public ResponseEntity<GeneralResponse<List<BalanceDto>>> getAll(){
+        List<BalanceDto> balances = fetchBalanceFlow.getAllBalances();
+        GeneralResponse<List<BalanceDto>> response = new GeneralResponse<>(true, balances);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
 }

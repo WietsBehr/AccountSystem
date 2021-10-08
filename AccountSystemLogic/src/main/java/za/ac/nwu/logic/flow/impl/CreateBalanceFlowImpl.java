@@ -23,11 +23,9 @@ public class CreateBalanceFlowImpl implements CreateBalanceFlow {
 
     @Override
     public BalanceDto create(BalanceDto balance){
-        //LOGGER.info("Input: {}", balance);
-//        if(null == balance.getBalanceToday()) {
-//            balance.setBalanceToday(1000L);
-//        }
-
+        if(null == balance.getBalanceToday()) {
+            balance.setBalanceToday(1000L);
+        }
         BalanceDto createBal = createBalance(balance);
         return createBal;
     }
