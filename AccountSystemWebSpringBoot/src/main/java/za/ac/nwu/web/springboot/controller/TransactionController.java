@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import za.ac.nwu.domain.dto.BalanceDto;
 import za.ac.nwu.domain.dto.TransactionDto;
 import za.ac.nwu.domain.service.GeneralResponse;
 import za.ac.nwu.logic.flow.CreateTransactionFlow;

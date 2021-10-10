@@ -19,7 +19,6 @@ public class CreateBalanceFlowImpl implements CreateBalanceFlow {
     public CreateBalanceFlowImpl(BalanceTranslator balanceTranslator) {
         this.balanceTranslator = balanceTranslator;
     }
-    //private static final Logger LOGGER = LoggerFactory.getLogger(CreateBalanceFlowImpl.class);
 
     @Override
     public BalanceDto create(BalanceDto balance){

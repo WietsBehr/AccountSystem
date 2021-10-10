@@ -1,12 +1,11 @@
 package za.ac.nwu.domain.service;
 
-//import java.io.Serial;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 public class GeneralResponse<e> implements Serializable {
 
-//    @Serial
     private static final long serialVersionUID = -4424297116985829976L;
     private final boolean successful;
     private final transient e payload;

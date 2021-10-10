@@ -34,12 +34,8 @@ public class TransactionDto implements Serializable {
         this.setCreatedDate(transaction.getCreatedDate());
     }
 
-
-
-
-
     @ApiModelProperty(position = 1,
-            value = "Transaction Balance_Id",
+            value = "BalanceTable Balance_Id",
             name = "BalanceId",
             notes = "Identifies the client's balance Id",
             dataType = "java.lang.Long",
